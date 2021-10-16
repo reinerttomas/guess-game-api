@@ -5,6 +5,7 @@ namespace Guess\Domain\League;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Nette\Utils\Strings;
 
 class League
 {
@@ -22,7 +23,7 @@ class League
         int $leagueApiId,
     ) {
         $this->name = $name;
-        $this->nameSlugged = $name;
+        $this->nameSlugged = Strings::webalize($name);
         $this->logo = $logo;
         $this->leagueApiId = $leagueApiId;
         $this->createdAt = new DateTimeImmutable();

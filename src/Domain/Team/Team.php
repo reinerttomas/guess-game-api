@@ -14,8 +14,10 @@ class Team
     private DateTimeInterface $createdAt;
     private ?DateTimeInterface $updatedAt;
 
-    public function __construct(string $name, string $logo)
-    {
+    public function __construct(
+        string $name,
+        string $logo
+    ) {
         $this->name = $name;
         $this->logo = $logo;
         $this->createdAt = new DateTimeImmutable();
