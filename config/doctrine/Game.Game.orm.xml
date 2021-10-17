@@ -9,7 +9,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="gameTime" type="datetime" column="game_time" nullable="false"/>
+    <field name="score" type="string" column="score" length="8" nullable="false"/>
     <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
     <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
     <many-to-one field="league" target-entity="Guess\Domain\League\League" fetch="LAZY">

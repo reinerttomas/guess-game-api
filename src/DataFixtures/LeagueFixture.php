@@ -41,7 +41,8 @@ final class LeagueFixture extends Fixture
     ): League {
         return new League(
             $name,
-            $logo, $leagueApiId,
+            $logo,
+            $leagueApiId,
         );
     }
 }

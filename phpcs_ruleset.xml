@@ -168,9 +168,7 @@
     <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
         <properties>
             <property name="rootNamespaces" type="array">
-                <element key="src" value="App"/>
-                <element key="src/Blog" value="Blog"/>
-                <element key="tests" value="App\Tests"/>
+                <element key="src" value="Guess"/>
             </property>
         </properties>
     </rule>
@@ -201,7 +199,7 @@
     <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration" />
     <rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment" />
     <!--    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment" />-->
-    <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment" />
+<!--    <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment" />-->
     <rule ref="SlevomatCodingStandard.Commenting.UselessFunctionDocComment" />
     <rule ref="SlevomatCodingStandard.Commenting.UselessInheritDocComment" />
     <!--    <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn" />-->

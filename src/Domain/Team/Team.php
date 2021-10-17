@@ -16,7 +16,7 @@ class Team
 
     public function __construct(
         string $name,
-        string $logo
+        string $logo,
     ) {
         $this->name = $name;
         $this->logo = $logo;

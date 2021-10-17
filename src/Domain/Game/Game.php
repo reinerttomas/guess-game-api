@@ -17,7 +17,7 @@ class Game
     private League $league;
     private Team $homeTeam;
     private Team $awayTeam;
-    private DateTimeInterface $gameTime;
+    private string $score;
     private DateTimeInterface $createdAt;
     private ?DateTimeInterface $updatedAt;
 
@@ -28,12 +28,12 @@ class Game
         League $league,
         Team $homeTeam,
         Team $awayTeam,
-        DateTimeInterface $gameTime,
+        string $score,
     ) {
         $this->league = $league;
         $this->homeTeam = $homeTeam;
         $this->awayTeam = $awayTeam;
-        $this->gameTime = $gameTime;
+        $this->score = $score;
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = null;
         $this->guesses = new ArrayCollection();
@@ -59,9 +59,9 @@ class Game
         return $this->awayTeam;
     }
 
-    public function getGameTime(): DateTimeInterface
+    public function getScore(): string
     {
-        return $this->gameTime;
+        return $this->score;
     }
 
     public function getCreatedAt(): DateTimeInterface
