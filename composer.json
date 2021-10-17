@@ -20,6 +20,14 @@
         "symfony/runtime": "5.3.*",
         "symfony/yaml": "5.3.*"
     },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^0.12.99",
+        "phpstan/phpstan-doctrine": "^0.12.44",
+        "phpstan/phpstan-strict-rules": "^0.12.11",
+        "phpstan/phpstan-symfony": "^0.12.44"
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
@@ -52,6 +60,13 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpstan": [
+            "@php bin/console cache:warmup --env=test",
+            "phpstan analyse -c phpstan.neon --no-progress --memory-limit 1G"
+        ],
+        "ci": [
+            "@phpstan"
         ]
     },
     "conflict": {
@@ -62,8 +77,5 @@
             "allow-contrib": false,
             "require": "5.3.*"
         }
-    },
-    "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4"
     }
 }

@@ -6,7 +6,9 @@ namespace Guess\Domain\Game;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Guess\Domain\League\League;
+use Guess\Domain\Player\Guess;
 use Guess\Domain\Team\Team;
 
 class Game
@@ -18,7 +20,9 @@ class Game
     private DateTimeInterface $gameTime;
     private DateTimeInterface $createdAt;
     private ?DateTimeInterface $updatedAt;
-    private ArrayCollection $guesses;
+
+    /** @var Collection<int, Guess> */
+    private Collection $guesses;
 
     public function __construct(
         League $league,
@@ -71,9 +75,9 @@ class Game
     }
 
     /**
-     * @todo - anotace
+     * @return Collection<int, Guess>
      */
-    public function getGuesses(): ArrayCollection
+    public function getGuesses(): Collection
     {
         return $this->guesses;
     }

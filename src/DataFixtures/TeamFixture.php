@@ -12,7 +12,7 @@ final class TeamFixture extends Fixture
     public const TEAM_1 = 'team.1';
     public const TEAM_2 = 'team.2';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $team1 = $this->create(
             'team1',
