@@ -1,5 +1,6 @@
-PHP_SERVICE := $(docker ps -q -f "name=guess-game-api_php")
+CONTAINER_NAME := $$(docker ps --format "{{.Names}}" --filter "name=php")
 
+### DOCKER ###
 build:
 	@docker-compose build
 
@@ -10,23 +11,42 @@ down:
 	@docker-compose down
 
 clean:
-	@docker system prune --volumes --force
+	@docker system prune --all --force
 
+bash:
+	@docker exec -it $(CONTAINER_NAME) bash
+
+### COMPOSER ###
 composer:
-	@docker-compose exec -T $(PHP_SERVICE) composer install
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer install
 
-console:
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console
+### ANALYSIS ###
+phpstan:
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer phpstan
 
+lint:
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer lint
+
+ccs:
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer ccs
+
+fcs:
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer fcs
+
+### TESTING ###
+ci:
+	@docker exec -e APP_ENV=test -it $(CONTAINER_NAME) composer ci
+
+### DATABASE ###
 doctrine-fixtures-load:
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console doctrine:fixtures:load --no-interaction
+	@docker exec -it $(CONTAINER_NAME) php bin/console doctrine:fixtures:load --no-interaction
 
 doctrine-mapping-info:
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console doctrine:mapping:info
+	@docker exec -it $(CONTAINER_NAME) php bin/console doctrine:mapping:info
 
 doctrine-mapping-import:
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console doctrine:mapping:import "App\Entity" xml --path=config/import
+	@docker exec -it $(CONTAINER_NAME) php bin/console doctrine:mapping:import "App\Entity" xml --path=config/import
 
 doctrine-schema-update:
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console doctrine:database:create --if-not-exists
-	@docker-compose exec -T $(PHP_SERVICE) php bin/console doctrine:schema:update --force
+	@docker exec -it $(CONTAINER_NAME) php bin/console doctrine:database:create --if-not-exists
+	@docker exec -it $(CONTAINER_NAME) php bin/console doctrine:schema:update --force
