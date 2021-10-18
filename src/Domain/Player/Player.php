@@ -7,8 +7,10 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class Player
+class Player implements UserInterface, PasswordAuthenticatedUserInterface
 {
     private int $id;
     private string $username;
@@ -90,5 +92,27 @@ class Player
     public function getGuesses(): Collection
     {
         return $this->guesses;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function getRoles(): array
+    {
+        return [
+            'ROLE_USER',
+        ];
+    }
+
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->password = null;
     }
 }
