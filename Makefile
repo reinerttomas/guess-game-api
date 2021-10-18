@@ -14,7 +14,7 @@ clean:
 	@docker system prune --all --force
 
 bash:
-	@docker exec -it $(CONTAINER_NAME) bash
+	@docker exec -it $(CONTAINER_NAME) sh
 
 ### COMPOSER ###
 composer:
