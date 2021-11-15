@@ -1,4 +1,4 @@
-CONTAINER_NAME := $$(docker ps --format "{{.Names}}" --filter "name=php")
+CONTAINER_NAME := guess-php
 
 ### DOCKER ###
 build:
