@@ -28,11 +28,10 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(
         string $username,
         string $email,
-        string $password,
     ) {
         $this->username = $username;
         $this->email = $email;
-        $this->password = $password;
+        $this->password = null;
         $this->point = 0;
         $this->avatar = 1;
         $this->isActive = true;
@@ -59,6 +58,13 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function changePassword(string $password): Player
+    {
+        $this->password = $password;
+
+        return $this;
     }
 
     public function getPoint(): int

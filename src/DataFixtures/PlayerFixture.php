@@ -6,25 +6,37 @@ namespace Guess\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Guess\Domain\Player\Player;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class PlayerFixture extends Fixture
 {
     public const PLAYER_1 = 'player.1';
     public const PLAYER_2 = 'player.2';
 
+    private UserPasswordHasherInterface $userPasswordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $player1 = $this->create(
             'player1',
             'player1@example.com',
-            'Player1!',
         );
+
+        $password1 = $this->userPasswordHasher->hashPassword($player1, 'Player1!');
+        $player1->changePassword($password1);
 
         $player2 = $this->create(
             'player2',
             'player2@example.com',
-            'Player2!',
         );
+
+        $password2 = $this->userPasswordHasher->hashPassword($player1, 'Player2!');
+        $player2->changePassword($password2);
 
         $manager->persist($player1);
         $manager->persist($player2);
@@ -37,12 +49,10 @@ final class PlayerFixture extends Fixture
     private function create(
         string $username,
         string $email,
-        string $password,
     ): Player {
         return new Player(
             $username,
             $email,
-            $password,
         );
     }
 }
