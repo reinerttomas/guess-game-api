@@ -42,3 +42,8 @@ parameters:
     # probably will have to add the following bootstrap file:
     #bootstrapFiles:
         #- %rootDir%/../../../vendor/bin/.phpunit/phpunit/vendor/autoload.php
+
+    # Doctrine extension
+    # @see https://blog.martinhujer.cz/how-to-configure-phpstan-for-symfony-applications/
+    doctrine:
+        objectManagerLoader: build/phpstan/object-manager.php
