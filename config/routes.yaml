@@ -4,3 +4,8 @@
 
 api_login:
   path: /api/login
+
+api_player_create:
+  path: /api/player
+  methods: POST
+  controller: Guess\Controller\Player\PlayerController::index

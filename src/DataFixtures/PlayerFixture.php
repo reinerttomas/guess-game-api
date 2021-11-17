@@ -27,16 +27,18 @@ final class PlayerFixture extends Fixture
             'player1@example.com',
         );
 
-        $password1 = $this->userPasswordHasher->hashPassword($player1, 'Player1!');
-        $player1->changePassword($password1);
+        $player1->changePassword(
+            $this->userPasswordHasher->hashPassword($player1, 'Player1!'),
+        );
 
         $player2 = $this->create(
             'player2',
             'player2@example.com',
         );
 
-        $password2 = $this->userPasswordHasher->hashPassword($player1, 'Player2!');
-        $player2->changePassword($password2);
+        $player2->changePassword(
+            $this->userPasswordHasher->hashPassword($player1, 'Player2!'),
+        );
 
         $manager->persist($player1);
         $manager->persist($player2);
